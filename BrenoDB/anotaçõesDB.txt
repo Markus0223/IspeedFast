@@ -1,0 +1,214 @@
+Listar *absolutamente todas* as palavras-chave do SQL renderia um livro gigante (são centenas!), mas eu posso organizar as mais importantes e mais usadas no dia a dia para você colocar na sua "colinha".
+
+A melhor forma de aprender SQL não é decorar uma lista alfabética, mas sim entender as "famílias" de comandos. Aqui está o seu arsenal organizado:
+
+### 🏗️ 1. Comandos de Estrutura (DDL - Data Definition Language)
+
+*São as palavras usadas para construir e modificar a "planta" do seu banco de dados.*
+
+| Comando | Para que serve |
+| --- | --- |
+| **CREATE DATABASE** | Cria um banco de dados novo do zero. |
+| **CREATE TABLE** | Cria uma nova tabela dentro do banco. |
+| **ALTER TABLE** | Altera uma tabela que já existe (adiciona ou remove colunas). |
+| **DROP TABLE** | Apaga completamente uma tabela e tudo que tem dentro dela. |
+| **TRUNCATE TABLE** | Esvazia a tabela (apaga os dados), mas mantém a estrutura de colunas intacta. |
+
+---
+
+### 🗂️ 2. Tipos de Dados
+
+*São usados logo após o nome da coluna para dizer que tipo de informação vai morar ali.*
+
+| Tipo | O que armazena |
+| --- | --- |
+| **INT** | Números inteiros (ex: 1, 15, 1000). Usado muito para IDs. |
+| **DECIMAL** ou **FLOAT** | Números com vírgula (ex: 10.50, 99.99). Usado para dinheiro ou notas. |
+| **VARCHAR(n)** | Textos de tamanho variável até um limite "n". (ex: `VARCHAR(255)` para e-mails ou nomes). |
+| **CHAR(n)** | Textos de tamanho fixo exato. (ex: `CHAR(2)` para estados como 'SP' ou 'AC'). |
+| **TEXT** | Textos muito longos e sem limite rígido (ex: uma redação, comentários). |
+| **DATE** | Apenas datas (Formato: YYYY-MM-DD). |
+| **TIME** | Apenas horários (Formato: HH:MM:SS). |
+| **DATETIME** | Data e horário juntos no mesmo campo. |
+
+---
+
+### 🔑 3. Regras e Chaves (Constraints)
+
+*São as palavras que impõem limites e conectam as tabelas.*
+
+| Palavra-chave | A regra que ela aplica |
+| --- | --- |
+| **PRIMARY KEY** | A chave primária. Garante que aquele dado (geralmente o ID) seja único e nunca se repita. |
+| **FOREIGN KEY** | A chave estrangeira. Conecta a coluna de uma tabela com a chave primária de outra tabela. |
+| **NOT NULL** | Obriga a coluna a ser preenchida (não aceita campos vazios). |
+| **UNIQUE** | Garante que o valor não se repita naquela coluna (ex: CPF, E-mail), mesmo não sendo chave primária. |
+| **DEFAULT** | Define um valor padrão caso ninguém digite nada na hora de salvar. |
+| **AUTO_INCREMENT** | Faz o número (ID) crescer sozinho (1, 2, 3...) toda vez que um dado novo é salvo (muito comum no MySQL). |
+
+---
+
+### ✍️ 4. Manipulação de Dados (DML - Data Manipulation Language)
+
+*São os comandos para inserir e editar o conteúdo de fato.*
+
+| Comando | Ação |
+| --- | --- |
+| **INSERT INTO** | Adiciona uma nova linha (registro) dentro de uma tabela. |
+| **VALUES** | Usado junto com o INSERT para declarar quais são os valores exatos sendo adicionados. |
+| **UPDATE** | Atualiza/modifica dados que já existem na tabela. |
+| **SET** | Usado junto com o UPDATE para dizer qual é o novo valor. |
+| **DELETE FROM** | Apaga uma ou mais linhas da tabela. |
+
+---
+
+### 🔍 5. Consultas e Filtros (DQL - Data Query Language)
+
+*São os comandos para você fazer perguntas ao banco de dados.*
+
+| Comando | O que faz |
+| --- | --- |
+| **SELECT** | Seleciona quais colunas você quer ver. (O famoso `SELECT *` pega todas as colunas). |
+| **FROM** | Diz de qual tabela você está puxando os dados. |
+| **WHERE** | O filtro. Traz apenas os dados que atendem a uma condição (ex: `WHERE idade = 18`). |
+| **JOIN** | Junta dados de duas tabelas diferentes em uma mesma pesquisa usando chaves em comum. |
+| **ORDER BY** | Organiza os resultados em ordem alfabética ou numérica (`ASC` para crescente, `DESC` para decrescente). |
+| **GROUP BY** | Agrupa resultados iguais. |
+
+---
+
+### ⚙️ 6. Operadores de Condição (Usados com o WHERE)
+
+*Palavras que ajudam a refinar a sua busca.*
+
+| Operador | Como funciona |
+| --- | --- |
+| **AND** / **OR** / **NOT** | "E", "Ou", "Não". (Ex: Busca alunos com 18 anos `AND` que moram em SP). |
+| **IN** | Busca múltiplos valores exatos de uma vez. (Ex: `WHERE estado IN ('SP', 'RJ', 'MG')`). |
+| **BETWEEN** | Pega valores entre um intervalo. (Ex: `WHERE preco BETWEEN 10 AND 50`). |
+| **LIKE** | Busca por pedaços de texto. (Ex: `WHERE nome LIKE 'A%'` busca todos que começam com a letra A). |
+| **IS NULL** | Busca campos que foram deixados totalmente vazios. |
+
+
+
+
+
+
+============================================================================================================================================================================================
+
+============================================================================================================================================================================================
+
+============================================================================================================================================================================================
+
+
+
+
+
+
+Com certeza! Ver os comandos rodando em cenários reais é a melhor forma de entender como eles funcionam.
+
+Para ficar perfeito para você, vou criar todos os exemplos imaginando o banco de dados do **IspeedFast** (seu sistema de agendamento e gerenciamento escolar).
+
+Vamos imaginar que você tem as tabelas `alunos`, `salas`, `professores` e `agendamentos`. Aqui estão os exemplos práticos:
+
+### 🔍 1. Exemplos de Consultas e Filtros (O Básico)
+
+**`SELECT` e `FROM` (A busca simples)**
+Você quer ver apenas o nome e a matrícula de todos os alunos cadastrados, sem trazer o resto das informações (como CPF, endereço, etc).
+
+```sql
+SELECT nome, matricula FROM alunos;
+
+```
+
+*(Se você quisesse trazer TODAS as colunas da tabela, usaria `SELECT * FROM alunos;`)*
+
+**`WHERE` (O filtro direto)**
+Você quer encontrar todas as salas do sistema que têm capacidade para exatamente 30 pessoas.
+
+```sql
+SELECT * FROM salas WHERE capacidade = 30;
+
+```
+
+**`ORDER BY` (A organização)**
+Você quer uma lista com o nome de todos os professores, mas precisa que a lista venha em ordem alfabética.
+
+```sql
+SELECT nome FROM professores ORDER BY nome ASC;
+
+```
+
+*(Para ordem decrescente, de Z a A, você usaria `DESC` no final).*
+
+**`GROUP BY` (Os relatórios)**
+Você quer saber quantos alunos existem matriculados em cada turno (Manhã, Tarde, Noite). O banco de dados agrupa os turnos e conta quantas pessoas têm em cada um.
+
+```sql
+SELECT turno, COUNT(*) FROM alunos GROUP BY turno;
+
+```
+
+**`JOIN` (A união de tabelas)**
+O agendamento só salva o `id` do aluno e o `id` da sala. Para você ver o **nome** do aluno e o **número** da sala na mesma tela, você precisa juntar as tabelas.
+
+```sql
+SELECT alunos.nome, salas.numero 
+FROM agendamentos
+JOIN alunos ON agendamentos.aluno_id = alunos.id
+JOIN salas ON agendamentos.sala_id = salas.id;
+
+```
+
+---
+
+### ⚙️ 2. Exemplos de Operadores de Condição (Refinando a busca)
+
+**`AND` / `OR` / `NOT` (As condições compostas)**
+Você precisa encontrar uma sala livre que tenha capacidade maior ou igual a 40 pessoas **E** que tenha um projetor.
+
+```sql
+SELECT * FROM salas WHERE capacidade >= 40 AND possui_projetor = true;
+
+```
+
+Você quer listar os alunos que estão matriculados no 1º ano **OU** no 2º ano.
+
+```sql
+SELECT * FROM alunos WHERE ano_escolar = 1 OR ano_escolar = 2;
+
+```
+
+**`IN` (A lista rápida)**
+Em vez de usar vários `OR` como no exemplo acima, o `IN` deixa tudo mais limpo. Vamos buscar alunos dos turnos Manhã e Noite.
+
+```sql
+SELECT * FROM alunos WHERE turno IN ('Manhã', 'Noite');
+
+```
+
+**`BETWEEN` (O intervalo)**
+Você quer ver todos os agendamentos de salas que foram feitos no mês de Junho de 2026. O `BETWEEN` pega tudo que está "entre" as duas datas.
+
+```sql
+SELECT * FROM agendamentos WHERE data_reserva BETWEEN '2026-06-01' AND '2026-06-30';
+
+```
+
+**`LIKE` (A busca por texto/pesquisa)**
+Um aluno foi na secretaria, mas você só lembra que o primeiro nome dele era "Carlos". O símbolo de porcentagem `%` significa "qualquer coisa que vier depois".
+
+```sql
+SELECT * FROM alunos WHERE nome LIKE 'Carlos%';
+
+```
+
+*(Se você quisesse alguém que tem "Silva" em qualquer parte do nome, usaria `%Silva%`).*
+
+**`IS NULL` (O caçador de dados vazios)**
+Você quer fazer uma limpa no banco de dados e encontrar todos os alunos que esqueceram de cadastrar o e-mail no sistema (o campo ficou completamente vazio no banco).
+
+```sql
+SELECT * FROM alunos WHERE email IS NULL;
+
+```
