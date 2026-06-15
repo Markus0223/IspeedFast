@@ -1,6 +1,7 @@
 CREATE DATABASE IspeedFast;
 USE IspeedFast;
 
-CREATE TABLE Usuário (
-    ID_Usuário INT PRIMARY KEY
+CREATE TABLE Usuario (
+    ID_Usuário INT PRIMARY KEY,
+    Nome VARCHAR(50) NOT NULL
 );
