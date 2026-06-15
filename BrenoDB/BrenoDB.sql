@@ -1,0 +1,6 @@
+CREATE DATABASE IspeedFast;
+USE IspeedFast;
+
+CREATE TABLE Usuário (
+    ID_Usuário INT AUTO_INCREMENT PRIMARY KEY
+);
