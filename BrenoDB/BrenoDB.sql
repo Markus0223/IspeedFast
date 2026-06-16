@@ -9,3 +9,7 @@ CREATE TABLE Usuario (
     Senha VARCHAR(20) NOT NULL,
     Tipo_Usuario VARCHAR NOT NULL
 );
+
+CREATE TABLE Admin (
+    ID_Admin INT PRIMARY KEY
+);
