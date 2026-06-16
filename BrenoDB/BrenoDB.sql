@@ -11,5 +11,9 @@ CREATE TABLE Usuario (
 );
 
 CREATE TABLE Admin (
-    ID_Admin INT PRIMARY KEY
+    Acesso VARCHAR(20) UNIQUE NOT NULL,
+    Formacao VARCHAR(50) NOT NULL,
+    ID_Usuario_FK INT,
+
+    FOREIGN KEY (ID_Usuario_FK) REFERENCES Usuario(ID_Usuário)
 );
