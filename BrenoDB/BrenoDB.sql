@@ -9,3 +9,11 @@ CREATE TABLE Usuario (
     Senha VARCHAR(20) NOT NULL,
     Tipo_Usuario VARCHAR NOT NULL
 );
+
+CREATE TABLE Admin (
+    Acesso VARCHAR(20) UNIQUE NOT NULL,
+    Formacao VARCHAR(50) NOT NULL,
+    ID_Usuario_FK INT,
+
+    FOREIGN KEY (ID_Usuario_FK) REFERENCES Usuario(ID_Usuário)
+);
