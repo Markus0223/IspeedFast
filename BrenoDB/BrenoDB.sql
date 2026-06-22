@@ -58,3 +58,12 @@ CREATE TABLE Sala (
 
     FOREIGN KEY (ID_Espaco_FK) REFERENCES Espaco(ID_Espaco)
 );
+
+CREATE TABLE Laboratorio (
+    Nome_Lab VARCHAR(30) UNIQUE NOT NULL,
+    Descricao_Lab VARCHAR(255) NOT NULL,
+    Recursos_Lab VARCHAR(255) NOT NULL,
+    ID_Espaco_FK INT,
+
+    FOREIGN KEY (ID_Espaco_FK) REFERENCES Espaco(ID_Espaco)
+);
