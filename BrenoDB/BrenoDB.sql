@@ -10,12 +10,12 @@ CREATE TABLE Usuario (
     Tipo_Usuario VARCHAR NOT NULL
 );
 
-CREATE TABLE Admin (
+CREATE TABLE Administrador (
     Acesso VARCHAR(20) UNIQUE NOT NULL,
     Formacao VARCHAR(50) NOT NULL,
     ID_Usuario_FK INT,
 
-    FOREIGN KEY (ID_Usuario_FK) REFERENCES Usuario(ID_Usuário)
+    FOREIGN KEY (ID_Usuario_FK) REFERENCES Usuario(ID_Usuario)
 );
 
 CREATE TABLE Aluno (
@@ -48,4 +48,13 @@ CREATE TABLE Espaco (
     Capacidade INT,
     Status_Espaco BOOLEAN NOT NULL,
     Tipo_Espaco VARCHAR(15) NOT NULL
+);
+
+CREATE TABLE Sala (
+    Numero_Sala VARCHAR(30) UNIQUE NOT NULL,
+    Qntd_Carteiras INT,
+    Projetor_Sala BOOLEAN,
+    ID_Espaco_FK INT,
+
+    FOREIGN KEY (ID_Espaco_FK) REFERENCES Espaco(ID_Espaco)
 );
