@@ -3,29 +3,29 @@ USE IspeedFast;
 
 -- SUPERCLASSE --
 CREATE TABLE Usuario ( --1--
-    ID_Usuário INT PRIMARY KEY,
+    ID_Usuario INT PRIMARY KEY,
     Nome VARCHAR(50) NOT NULL,
     Telefone VARCHAR(20) UNIQUE,
     Email VARCHAR(100) NOT NULL UNIQUE,
     Senha VARCHAR(20) NOT NULL,
-    Tipo_Usuario VARCHAR NOT NULL
+    Tipo_Usuario VARCHAR(13) NOT NULL
 );
 
 -- SUBCLASSE(Usuario) --
 CREATE TABLE Administrador ( --2--
+    ID_Usuario_FK INT PRIMARY KEY,
     Acesso VARCHAR(20) UNIQUE NOT NULL,
     Formacao VARCHAR(50) NOT NULL,
-    ID_Usuario_FK INT,
 
     FOREIGN KEY (ID_Usuario_FK) REFERENCES Usuario(ID_Usuario)
 );
 
 -- SUBCLASSE(Usuario) --
 CREATE TABLE Aluno ( --3--
+    ID_Usuario_FK INT PRIMARY KEY,
     Matricula VARCHAR(20) UNIQUE NOT NULL,
     Ano_Ingresso INT NOT NULL,
     Curso VARCHAR(30) NOT NULL,
-    ID_Usuario_FK INT,
 
     FOREIGN KEY (ID_Usuario_FK) REFERENCES Usuario(ID_Usuario)
 );
@@ -46,7 +46,7 @@ CREATE TABLE Agenda ( --5--
     Itens_Agenda VARCHAR(50),
     ID_subAdmin_FK INT,
 
-    FOREIGN KEY (ID_subAdmin_FK) REFERENCES Usuario(ID_Usuario)
+    FOREIGN KEY (ID_subAdmin_FK) REFERENCES Administrador(ID_Usuario_FK)
 );
 
 -- SUPERCLASSE --
@@ -59,20 +59,20 @@ CREATE TABLE Espaco ( --6--
 
 -- SUBCLASSE(Espaco) --
 CREATE TABLE Sala ( --7--
+    ID_Espaco_FK INT PRIMARY KEY,
     Numero_Sala VARCHAR(30) UNIQUE NOT NULL,
     Qntd_Carteiras INT,
     Projetor_Sala BOOLEAN,
-    ID_Espaco_FK INT,
 
     FOREIGN KEY (ID_Espaco_FK) REFERENCES Espaco(ID_Espaco)
 );
 
 -- SUBCLASSE(Espaco) --
 CREATE TABLE Laboratorio ( --8--
+    ID_Espaco_FK INT PRIMARY KEY,
     Nome_Lab VARCHAR(30) UNIQUE NOT NULL,
     Descricao_Lab VARCHAR(255) NOT NULL,
     Recursos_Lab VARCHAR(255) NOT NULL,
-    ID_Espaco_FK INT,
 
     FOREIGN KEY (ID_Espaco_FK) REFERENCES Espaco(ID_Espaco)
 );
@@ -90,7 +90,7 @@ CREATE TABLE Reserva ( --9--
     ID_Agenda_FK INT,
     ID_Espaco_FK INT,
 
-    FOREIGN KEY (ID_subAluno_FK) REFERENCES Usuario(ID_Usuario),
+    FOREIGN KEY (ID_subAluno_FK) REFERENCES Aluno(ID_Usuario_FK),
     FOREIGN KEY (ID_Professor_FK) REFERENCES Professor(ID_Professor),
     FOREIGN KEY (ID_Agenda_FK) REFERENCES Agenda(ID_Agenda),
     FOREIGN KEY (ID_Espaco_FK) REFERENCES Espaco(ID_Espaco)
@@ -105,6 +105,6 @@ CREATE TABLE Relatorio ( --10--
     ID_subAdmin_FK INT,
     ID_Reserva_FK INT,
 
-    FOREIGN KEY (ID_subAdmin_FK) REFERENCES Usuario(ID_Usuario),
+    FOREIGN KEY (ID_subAdmin_FK) REFERENCES Administrador(ID_Usuario_FK),
     FOREIGN KEY (ID_Reserva_FK) REFERENCES Reserva(ID_Reserva)
 );
