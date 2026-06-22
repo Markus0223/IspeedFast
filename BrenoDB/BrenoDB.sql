@@ -85,3 +85,15 @@ CREATE TABLE Reserva (
     FOREIGN KEY (ID_Agenda_FK) REFERENCES Agenda(ID_Agenda),
     FOREIGN KEY (ID_Espaco_FK) REFERENCES Espaco(ID_Espaco)
 );
+
+CREATE TABLE Relatorio (
+    ID_Relatorio INT PRIMARY KEY,
+    Titulo VARCHAR(50) NOT NULL,
+    Descricao_Rel VARCHAR(255),
+    Data_Rel DATE NOT NULL,
+    ID_subAdmin_FK INT,
+    ID_Reserva_FK INT,
+
+    FOREIGN KEY (ID_subAdmin_FK) REFERENCES Usuario(ID_Usuario),
+    FOREIGN KEY (ID_Reserva_FK) REFERENCES Reserva(ID_Reserva)
+);
