@@ -26,3 +26,9 @@ CREATE TABLE Aluno (
 
     FOREIGN KEY (ID_Usuario_FK) REFERENCES Usuario(ID_Usuario)
 );
+
+CREATE TABLE Professor (
+    ID_Professor INT PRIMARY KEY,
+    Nome_Professor VARCHAR(50) NOT NULL,
+    Disciplina VARCHAR(40) NOT NULL
+);
