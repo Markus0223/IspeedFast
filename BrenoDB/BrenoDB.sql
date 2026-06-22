@@ -67,3 +67,21 @@ CREATE TABLE Laboratorio (
 
     FOREIGN KEY (ID_Espaco_FK) REFERENCES Espaco(ID_Espaco)
 );
+
+CREATE TABLE Reserva (
+    ID_Reserva INT PRIMARY KEY,
+    Hora_Inicio TIME NOT NULL,
+    Hora_Fim TIME NOT NULL,
+    Descricao VARCHAR(255),
+    Data_Reserva DATE NOT NULL,
+    Status_Reserva BOOLEAN NOT NULL,
+    ID_subAluno_FK INT,
+    ID_Professor_FK INT,
+    ID_Agenda_FK INT,
+    ID_Espaco_FK INT,
+
+    FOREIGN KEY (ID_subAluno_FK) REFERENCES Usuario(ID_Usuario),
+    FOREIGN KEY (ID_Professor_FK) REFERENCES Professor(ID_Professor),
+    FOREIGN KEY (ID_Agenda_FK) REFERENCES Agenda(ID_Agenda),
+    FOREIGN KEY (ID_Espaco_FK) REFERENCES Espaco(ID_Espaco)
+);
