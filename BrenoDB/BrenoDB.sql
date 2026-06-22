@@ -42,3 +42,10 @@ CREATE TABLE Agenda (
 
     FOREIGN KEY (ID_subAdmin_FK) REFERENCES Usuario(ID_Usuario)
 );
+
+CREATE TABLE Espaco (
+    ID_Espaco INT PRIMARY KEY,
+    Capacidade INT,
+    Status_Espaco BOOLEAN NOT NULL,
+    Tipo_Espaco VARCHAR(15) NOT NULL
+);
