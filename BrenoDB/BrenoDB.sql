@@ -32,3 +32,13 @@ CREATE TABLE Professor (
     Nome_Professor VARCHAR(50) NOT NULL,
     Disciplina VARCHAR(40) NOT NULL
 );
+
+CREATE TABLE Agenda (
+    ID_Agenda INT PRIMARY KEY,
+    Ano_Letivo INT UNIQUE NOT NULL,
+    Data_Agenda DATE,
+    Itens_Agenda VARCHAR(50),
+    ID_subAdmin_FK INT,
+
+    FOREIGN KEY (ID_subAdmin_FK) REFERENCES Usuario(ID_Usuario)
+);
